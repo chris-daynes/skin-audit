@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const url = 'mongodb://chrisd:chrisd@ds027618.mlab.com:27618/skin-audit-dev';
+const url = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
@@ -11,7 +11,7 @@ const app = express();
 
 
 
-mongoose.connect(url);
+mongoose.connect(url.mongoURI);
 
 app.use(
   cookieSession({

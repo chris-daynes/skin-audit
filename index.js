@@ -21,17 +21,17 @@ mongoose.connect(url.mongoURL);
 app.use(morgan('dev')); //logs every requrest to the console.
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(cookieParser()); //to read cookies
-
-
-//required for passport
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: ['my secret']
   })
 )
+
+
+//required for passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routes
 require('./routes/authRoutes')(app);

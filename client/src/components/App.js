@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
-const Landing = () => <h1>Landing</h1>;
+import Landing from './Landing';
 const Dashboard = () => <h1>Dashboard</h1>;
 const NewPatient = () => <h1>NewPatient</h1>;
 

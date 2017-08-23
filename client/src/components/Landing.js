@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { loginUser } from '../actions/userActions';
 
 class Landing extends Component {
 
  handleSubmit() {
-    alert('Hello handleSubmit!')
+    const user = {
+      username: findDOMNode(this.refs.username).value,
+      password: findDOMNode(this.refs.password).value
+    }
+    this.props.loginUser(user)
   }
 
   render() {
@@ -30,4 +38,8 @@ class Landing extends Component {
   }
 }
 
-export default Landing
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ loginUser });
+};
+
+export default connect(null, mapDispatchToProps)(Landing)

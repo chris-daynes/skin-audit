@@ -11,8 +11,8 @@ import reducers from './reducers/index';
 
 //create the redux store(reducers, store)
 const store = createStore(reducers, {}, applyMiddleware(logger, reduxThunk))
-store.subscribe(() => store.getState())
-store.dispatch({ type: 'INIT'})
+// store.subscribe(() => store.getState())
+// store.dispatch({ type: 'INIT'})
 
 ReactDOM.render(
   <Provider store={store}>

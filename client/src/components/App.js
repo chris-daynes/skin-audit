@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from  '../actions';
+
 
 import Header from './Header';
 import Landing from './Landing';
@@ -8,6 +11,11 @@ const NewPatient = () => <h1>NewPatient</h1>;
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.fetchUser()
+  }
+
   render() {
     return (
       <div>
@@ -21,7 +29,7 @@ class App extends Component {
         </BrowserRouter>
       </div>
     ); 
-  };
+  }
 }
 
-export default App;
+export default connect(null, actions)(App);

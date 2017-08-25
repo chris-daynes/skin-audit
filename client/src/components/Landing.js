@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { loginUser } from '../actions/userActions';
+import * as actions from '../actions';
 
 class Landing extends Component {
 
- handleSubmit() {
-    const user = {
-      username: findDOMNode(this.refs.username).value,
-      password: findDOMNode(this.refs.password).value
-    }
-    this.props.loginUser(user)
+ handleSubmit(e) {
+   e.preventDefault();
+   let user = {}
+   for (const field in this.refs) {
+    //  var encodedKey = encodeURIComponent(field);
+    //  var encodedValue = encodeURIComponent(this.refs[field])
+    //  formBody.push(encodedKey + '=' + encodedValue);
+     
+     user[field] = this.refs[field].value;
+   }
+    this.props.loginUser(user);
   }
 
   render() {
     return (
       <div>
         <h1>Component Landing</h1>
-        <form action='' onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           Username:<br/>
           <input 
             type='text' 
@@ -31,15 +35,15 @@ class Landing extends Component {
             ref='password'/>
           <br />
           <br />
-          <input type='submit'  value='Submit'/>
+          <input type='submit' value='submit'/>
         </form>
       </div>
     )
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser });
-};
+function mapStateToProps(state) {
+  return { auth: state.auth }
+}
 
-export default connect(null, mapDispatchToProps)(Landing)
+export default connect(mapStateToProps, actions)(Landing)

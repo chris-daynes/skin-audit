@@ -6,6 +6,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 require('./models/User');
 require('./services/passport');
@@ -19,6 +20,7 @@ mongoose.connect(url.mongoURL);
 
 //Setting up the express app
 app.use(morgan('dev')); //logs every requrest to the console.
+app.use(bodyParser.json());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(cookieParser()); //to read cookies
 app.use(

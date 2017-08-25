@@ -1,7 +1,13 @@
-export default (state={}, action) => {
+import { FETCH_USER, LOGIN_USER } from '../actions/types';
+
+export default (state = null, action) => {
   switch(action.type) {
-    case 'LOGIN_USER':
-      return 
+    case FETCH_USER: {
+      return action.payload || false;
+    }
+    case LOGIN_USER: {
+      return state.auth = action.payload
+    }
     default: 
       return state
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -9,12 +8,9 @@ class Landing extends Component {
    e.preventDefault();
    let user = {}
    for (const field in this.refs) {
-    //  var encodedKey = encodeURIComponent(field);
-    //  var encodedValue = encodeURIComponent(this.refs[field])
-    //  formBody.push(encodedKey + '=' + encodedValue);
-     
      user[field] = this.refs[field].value;
    }
+
     this.props.loginUser(user);
   }
 

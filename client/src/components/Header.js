@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Header extends Component {
 
+
   renderContent() {
-    switch(this.props.auth) {
-      case null: 
-        return <li>>...loading</li>
-      case false: 
-        return <li><a href="">Login</a></li>
-      default: 
-       return <li>Hello {this.props.auth.username}</li>
+    if (this.props.auth.username) {
+      console.log('***', this.props.auth)
+      return (
+        <div>
+          <li onClick={()=> this.props.logoutUser()}><a>Sign Out</a></li>
+          <li><a href="">Welcome Back {this.props.auth.username}</a></li>
+        </div>
+      )
+    }
+    else {
+      return <li><a>Sign In</a></li>
     }
   }
  
-
   render() {
     return (
       <div>
@@ -22,7 +27,6 @@ class Header extends Component {
           <div className="nav-wrapper">
             <a href="" className="brand-logo left">Skins</a>
             <ul className='right'>
-              <li><a href="">Sign up</a></li>
               {this.renderContent()}
             </ul>
           </div>
@@ -36,4 +40,4 @@ function mapStateToProps(state) {
   return { auth: state.auth };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);
